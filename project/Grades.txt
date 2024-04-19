@@ -1,0 +1,8 @@
+Mathematics,CSE123r,100
+Mennatullah Yasser Mohamed,19000581,8,8,16,50
+Nada Mohamed ,1900058s,9,7,15,55
+Yassin Ahmed ,19000532,9,9,16,50
+Rada Mohamed ,1900058s,9,7,15,55
+Sassin Ahmed ,1900053z,9,9,16,50
+Renal Tarek ,1900053z,9,9,16,50
+Shorouk Mohamed , 1900053z ,9,9,16,50
