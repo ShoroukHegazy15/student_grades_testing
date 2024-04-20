@@ -48,20 +48,4 @@ public class FileHandler {
         }
         return list;
     }
-
-    public static void main(String[] args) {
-        String filePath = "E:/senior 2/Testing/project testing/student_grades_testing/project/Grades.txt";
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.setFilePath(filePath);
-        Vector<Student> lines = fileHandler.GetData();
-
-        // Print the integers read from the file
-        System.out.println("Students info from file:");
-        for (Student st : lines) {
-            st.printStudent();
-        }
-        String outputFilePath = "E:/senior 2/Testing/project testing/student_grades_testing/project/output.txt";
-        OutputFileHandler output= new OutputFileHandler();
-        output.printFile(lines,outputFilePath);
-    }
 }
