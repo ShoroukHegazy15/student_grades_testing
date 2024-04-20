@@ -132,5 +132,12 @@ public class SubjectTest {
         assertFalse(subject.isCodeValid(null));
     }
 
-    // Test cases for subject full mark to be implemented
+    // Test cases for subject full mark
+    @Test
+    public void testDefaultFullMark() { //bug found here
+        Subject subject = new Subject();
+        assertEquals(Integer.valueOf(100), subject.getFullMark());
+    }
+
+
 }
