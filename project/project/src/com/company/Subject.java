@@ -4,18 +4,17 @@ public class Subject {
 
     private String name;
     private String code;
-    private Integer FullMark;
 
 
     public Subject(){
         this.name = "";
         this.code = "";
-        this.FullMark = 0;
+        //this.FullMark = 100;
     }
-    public Subject(String name, String code, Integer fullMArk) {
+    public Subject(String name, String code) {
         this.name = name;
         this.code = code;
-        this.FullMark = fullMArk;
+        //this.FullMark = fullMArk;
     }
 
     public String getName() {
@@ -27,7 +26,7 @@ public class Subject {
     }
 
     public Integer getFullMark() {
-        return FullMark;
+        return 100;
     }
 
     public boolean isValid(){
