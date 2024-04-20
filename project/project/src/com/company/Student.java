@@ -235,4 +235,12 @@ public class Student {
             return true;
         }
     }
+    public boolean isTotalMarkValid(Integer mark){
+        if (!(mark>=0 && mark<=100)) {
+            System.err.println("Total Mark is outside the range: " + mark);
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

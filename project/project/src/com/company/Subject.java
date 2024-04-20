@@ -31,8 +31,7 @@ public class Subject {
     }
 
     public boolean isValid(){
-        boolean isValid=isNameValid(this.name) && isCodeValid(this.code);
-        return isValid;
+        return isNameValid(this.name) && isCodeValid(this.code);
     }
 
     public boolean isNameValid(String name){
