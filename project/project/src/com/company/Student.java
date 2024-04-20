@@ -67,6 +67,10 @@ public class Student {
         totalMark = activitiesMark + oralPractMark
                 + finalExamMark + midtermMark;
     }
+
+    public void setTotalMark(Integer totalMark) {
+        this.totalMark = totalMark;
+    }
     public String getName() {
         return name;
     }

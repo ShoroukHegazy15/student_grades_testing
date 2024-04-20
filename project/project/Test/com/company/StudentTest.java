@@ -141,7 +141,378 @@ public class StudentTest {
         assertFalse(student.isFinalMarkValid(70));
     }
 
-    // Test cases for GPA and Grades to be implemented
+    // Test cases for GPA and Grades
+
+    @Test
+    public void testValidStudentGradeAPlus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(100);
+        student.calculateGrade_GPA();
+        assertEquals("A+", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+    @Test
+    public void testValidStudentGradeAPlus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(98);
+        student.calculateGrade_GPA();
+        assertEquals("A+", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testValidStudentGradeAPlus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(97);
+        student.calculateGrade_GPA();
+        assertEquals("A+", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeAPlus4() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(96);
+        student.calculateGrade_GPA();
+        assertNotEquals("A+", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeAPlus5() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(101);
+        student.calculateGrade_GPA();
+        assertNotEquals("A+", student.getGrade());
+        assertNotEquals(4.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testValidStudentGradeA1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(93);
+        student.calculateGrade_GPA();
+        assertEquals("A", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeA2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(95);
+        student.calculateGrade_GPA();
+        assertEquals("A", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeA3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(90);
+        student.calculateGrade_GPA();
+        assertNotEquals("A", student.getGrade());
+        assertNotEquals(4.0, student.getGPA(), 0.01);
+    }
+    @Test
+    public void testInvalidStudentGradeA4() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(98);
+        student.calculateGrade_GPA();
+        assertNotEquals("A", student.getGrade());
+        assertEquals(4.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeAMinus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(89);
+        student.calculateGrade_GPA();
+        assertEquals("A-", student.getGrade());
+        assertEquals(3.7, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeAMinus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(90);
+        student.calculateGrade_GPA();
+        assertEquals("A-", student.getGrade());
+        assertEquals(3.7, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeAMinus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(95);
+        student.calculateGrade_GPA();
+        assertNotEquals("A-", student.getGrade());
+        assertNotEquals(3.7, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeBPlus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(84);
+        student.calculateGrade_GPA();
+        assertEquals("B+", student.getGrade());
+        assertEquals(3.3, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeBPlus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(87);
+        student.calculateGrade_GPA();
+        assertEquals("B+", student.getGrade());
+        assertEquals(3.3, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeBPlus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(81);
+        student.calculateGrade_GPA();
+        assertNotEquals("B+", student.getGrade());
+        assertNotEquals(3.3, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testValidStudentGradeB1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(80);
+        student.calculateGrade_GPA();
+        assertEquals("B", student.getGrade());
+        assertEquals(3.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeB2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(82);
+        student.calculateGrade_GPA();
+        assertEquals("B", student.getGrade());
+        assertEquals(3.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeB3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(77);
+        student.calculateGrade_GPA();
+        assertNotEquals("B", student.getGrade());
+        assertNotEquals(3.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeBMinus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(76);
+        student.calculateGrade_GPA();
+        assertEquals("B-", student.getGrade());
+        assertEquals(2.7, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeBMinus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(78);
+        student.calculateGrade_GPA();
+        assertEquals("B-", student.getGrade());
+        assertEquals(2.7, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeBMinus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(75);
+        student.calculateGrade_GPA();
+        assertNotEquals("B-", student.getGrade());
+        assertNotEquals(2.7, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeCPlus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(73);
+        student.calculateGrade_GPA();
+        assertEquals("C+", student.getGrade());
+        assertEquals(2.3, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeCPlus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(74);
+        student.calculateGrade_GPA();
+        assertEquals("C+", student.getGrade());
+        assertEquals(2.3, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeCPlus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(68);
+        student.calculateGrade_GPA();
+        assertNotEquals("C+", student.getGrade());
+        assertNotEquals(2.3, student.getGPA(), 0.01);
+    }
+
+
+
+    @Test
+    public void testValidStudentGradeC1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(70);
+        student.calculateGrade_GPA();
+        assertEquals("C", student.getGrade());
+        assertEquals(2.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeC2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(72);
+        student.calculateGrade_GPA();
+        assertEquals("C", student.getGrade());
+        assertEquals(2.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeC3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(68);
+        student.calculateGrade_GPA();
+        assertNotEquals("C", student.getGrade());
+        assertNotEquals(2.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeCMinus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(67);
+        student.calculateGrade_GPA();
+        assertEquals("C-", student.getGrade());
+        assertEquals(1.7, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeCMinus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(69);
+        student.calculateGrade_GPA();
+        assertEquals("C-", student.getGrade());
+        assertEquals(1.7, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeCMinus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(65);
+        student.calculateGrade_GPA();
+        assertNotEquals("C-", student.getGrade());
+        assertNotEquals(1.7, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeDPlus1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(64);
+        student.calculateGrade_GPA();
+        assertEquals("D+", student.getGrade());
+        assertEquals(1.3, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeDPlus2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(65);
+        student.calculateGrade_GPA();
+        assertEquals("D+", student.getGrade());
+        assertEquals(1.3, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeDPlus3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(63);
+        student.calculateGrade_GPA();
+        assertNotEquals("D+", student.getGrade());
+        assertNotEquals(1.3, student.getGPA(), 0.01);
+    }
+
+
+
+    @Test
+    public void testValidStudentGradeD1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(60);
+        student.calculateGrade_GPA();
+        assertEquals("D", student.getGrade());
+        assertEquals(1.0, student.getGPA(), 0.01);
+    }
+
+
+    @Test
+    public void testValidStudentGradeD2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(63);
+        student.calculateGrade_GPA();
+        assertEquals("D", student.getGrade());
+        assertEquals(1.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testInvalidStudentGradeD3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(55);
+        student.calculateGrade_GPA();
+        assertNotEquals("D", student.getGrade());
+        assertNotEquals(1.0, student.getGPA(), 0.01);
+    }
+
+
+
+    @Test
+    public void testInvalidStudentGradeF1() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(60);
+        student.calculateGrade_GPA();
+        assertNotEquals("F", student.getGrade());
+        assertNotEquals(0.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testValidStudentGradeF2() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(50);
+        student.calculateGrade_GPA();
+        assertEquals("F", student.getGrade());
+        assertEquals(0.0, student.getGPA(), 0.01);
+    }
+
+    @Test
+    public void testValidStudentGradeF3() {
+        Student student = new Student("Menna Yasser", "6666666A", 8, 7, 18, 70);
+        student.setTotalMark(15);
+        student.calculateGrade_GPA();
+        assertEquals("F", student.getGrade());
+        assertEquals(0.0, student.getGPA(), 0.01);
+    }
 
 
 
