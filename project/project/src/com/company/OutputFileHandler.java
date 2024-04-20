@@ -7,13 +7,15 @@ import java.util.Vector;
 
 public class OutputFileHandler {
 
-    public void printFile(Vector<Student>students,String filePath){
+    public void printFile(Vector<Student>students, Subject subj, String filePath){
         try(PrintWriter writer = new PrintWriter(new FileWriter(filePath))){
-            //writer.println("Subject name: "+sbj.getName()+"\tSubject code: "+sbj.getFullMark());
-            writer.println(String.format("%-40s%-15s","Student name","Student number"));
+            writer.println("Subject Name: " +subj.getName() +"            Max Mark: " +subj.getFullMark() +"\n");
+
+            writer.println(String.format("%-40s%-20s%-10s%-10s","Student name","Student number","Grade","GPA"));
+
 
             for (Student student : students) {
-                writer.println(String.format("%-40s%-15s",student.getName() ,student.getCode()));
+                writer.println(String.format("%-40s%-20s%-10s%-10s",student.getName() ,student.getCode(),student.getGrade(),student.getGPA()));
             };
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());

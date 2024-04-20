@@ -12,9 +12,10 @@ public class FileHandler {
         this.filePath = filePath;
     }
 
-    public Vector<Student> GetData() {
+    public DataBundle GetData() {
 
-        Subject subj=new Subject();
+        Subject subj = new Subject();
+
         Vector<Student> list = new Vector<Student>();
         BufferedReader reader;
         boolean isFirstLine = true;
@@ -48,6 +49,6 @@ public class FileHandler {
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
-        return list;
+        return new DataBundle(list, subj);
     }
 }

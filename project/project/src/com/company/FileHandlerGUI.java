@@ -102,7 +102,9 @@ public class FileHandlerGUI extends JFrame{
             String filePath = filePathField.getText();
             FileHandler fileHandler = new FileHandler();
             fileHandler.setFilePath(filePath);
-            Vector<Student> lines = fileHandler.GetData();
+
+            Vector<Student> lines = fileHandler.GetData().getStudents();
+            Subject subj = fileHandler.GetData().getSubject();
 
             // Print the integers read from the file
             System.out.println("Students info from file:");
@@ -112,7 +114,7 @@ public class FileHandlerGUI extends JFrame{
             }
             String outputFilePath = outputFilePathField.getText();
             OutputFileHandler output= new OutputFileHandler();
-            output.printFile(lines,outputFilePath);
+            output.printFile(lines,subj,outputFilePath);
         }
     }
 

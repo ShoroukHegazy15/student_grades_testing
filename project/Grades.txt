@@ -1,4 +1,4 @@
-Mathematics,CSE123s,10
+Mathematics,CSE123s,100
 Mennatullah Yasser Mohamed,19000581,8,8,16,50
 Nada Mohamed ,1900058s,9,7,15,55
-Yassin Ahmed ,19000532,9,9,16,40
+Yassin Ahmed ,19000532,9,9,16,50
