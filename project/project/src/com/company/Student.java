@@ -22,12 +22,13 @@ public class Student {
 
     }
 
-    public void printStudent(){
+    public String printStudent(){
 
         Integer totalMark = getTotalMark();
         String grade = getGrade();
         double GPA = getGPA();
 
+        StringBuilder stringBuilder = new StringBuilder();
         System.out.println("name and code : " + this.name+" , "+code);
         System.out.println("\t Activities Mark: " + this.activitiesMark);
         System.out.println("\t Oral/practical Mark: "+this.oralPractMark);
@@ -36,6 +37,8 @@ public class Student {
         System.out.println("\t Total Mark: "+totalMark);
         System.out.println("\t Grade: "+grade);
         System.out.println("\t GPA: "+GPA);
+
+        return stringBuilder.toString();
     }
 
     public void setName(String name) {

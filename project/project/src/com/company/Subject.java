@@ -2,19 +2,21 @@ package com.company;
 
 public class Subject {
 
+
     private String name;
     private String code;
+    private int fullMark;
 
 
     public Subject(){
         this.name = "";
         this.code = "";
-        //this.FullMark = 100;
+        this.fullMark = 100;
     }
-    public Subject(String name, String code) {
+    public Subject(String name, String code, int fullMark) {
         this.name = name;
         this.code = code;
-        //this.FullMark = fullMArk;
+        this.fullMark = fullMark;
     }
 
     public String getName() {
@@ -26,11 +28,11 @@ public class Subject {
     }
 
     public Integer getFullMark() {
-        return 100;
+        return fullMark;
     }
 
     public boolean isValid(){
-        return isNameValid(this.name) && isCodeValid(this.code);
+        return isNameValid(this.name) && isCodeValid(this.code) && isFullMarkValid(this.fullMark);
     }
 
     public boolean isNameValid(String name){
@@ -63,6 +65,14 @@ public class Subject {
             return false;
         }
         return true;
+    }
+    public boolean isFullMarkValid(Integer mark){
+        if (mark!=100) {
+            System.err.println("FullMark isn't equal to 100: " + mark);
+            return false;
+        }else{
+            return true;
+        }
     }
 
 

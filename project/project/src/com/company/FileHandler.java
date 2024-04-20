@@ -33,10 +33,12 @@ public class FileHandler {
                 }
                 else {
                     String[] info = line.split(",");
-                    subj= new Subject(info[0],info[1]);
+                    subj= new Subject(info[0],info[1],Integer.parseInt(info[2]));
                     if(subj.isValid()){
                         System.out.println("Subject name: "+ subj.getName());
                         System.out.println("Subject code: "+ subj.getCode());
+                        System.out.println("Subject fullMark: "+ subj.getFullMark());
+
                     }
                     isFirstLine = false;
                 }
