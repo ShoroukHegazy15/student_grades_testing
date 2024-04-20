@@ -107,7 +107,7 @@ public class FileHandlerGUI extends JFrame{
             // Print the integers read from the file
             System.out.println("Students info from file:");
             for (Student st : lines) {
-                outputTextArea.append(st.toString() + "\n");
+                outputTextArea.append(st + "\n");
                 st.printStudent();
             }
             String outputFilePath = outputFilePathField.getText();

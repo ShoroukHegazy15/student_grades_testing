@@ -33,7 +33,7 @@ public class FileHandler {
                 }
                 else {
                     String[] info = line.split(",");
-                    subj= new Subject(info[0],info[1],Integer.parseInt(info[2]));
+                    subj= new Subject(info[0],info[1]);
                     if(subj.isValid()){
                         System.out.println("Subject name: "+ subj.getName());
                         System.out.println("Subject code: "+ subj.getCode());
