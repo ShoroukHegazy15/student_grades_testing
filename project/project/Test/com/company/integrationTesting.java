@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Vector;
 
+import static java.lang.StringTemplate.STR;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
@@ -152,8 +153,13 @@ public class integrationTesting {
         }
     }
 
+    // The next test cases will be on integration GUI with both
+    // "FileHandler and OutputFileHandler"
+
+
+    // Positive testing for putting correct sample data and writing it onto "output.txt"
     @Test
-    public void testFileProcessingSuccess() {
+    public void testGuiProcessingSuccess() {
         // Prepare GUI for testing
         FileHandlerGUI fileHandlerGUI = new FileHandlerGUI();
 
@@ -179,6 +185,59 @@ public class integrationTesting {
 
         // Clean up: delete the output file
         outputFile.delete();
+    }
+
+
+    // Negative testing for putting an empty txt file and see if the gui will print the "output.txt" or no
+    @Test
+    public void testGuiProcessingFailure1() {
+        // Prepare GUI for testing
+        FileHandlerGUI fileHandlerGUI = new FileHandlerGUI();
+
+        // Simulate selecting a valid input file
+        String currentDirectory = System.getProperty("user.dir");
+        String validInputFilePath = STR."\{currentDirectory}/project/empty_file.txt";
+        fileHandlerGUI.filePathField.setText(validInputFilePath);
+
+        // Set the output file path (directory)
+        String outputDirectoryPath = "E:/output.txt";
+        fileHandlerGUI.outputFilePathField.setText(outputDirectoryPath);
+
+        // Simulate button click to trigger file processing
+        fileHandlerGUI.new ProcessButtonListener()
+                .actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+
+        // Check if the output file is generated
+        File outputFile = new File(outputDirectoryPath);
+        assertFalse(outputFile.exists());
+
+    }
+
+
+    // Negative testing for putting a wrong data txt file and see if the gui will print the "output.txt" or no
+    @Test
+    public void testGuiProcessingFailure2() {
+        // Prepare GUI for testing
+        FileHandlerGUI fileHandlerGUI = new FileHandlerGUI();
+
+        // Simulate selecting a valid input file
+        String currentDirectory = System.getProperty("user.dir");
+        System.out.println(currentDirectory);
+        String validInputFilePath = STR."\{currentDirectory}/project/wrong_data_sample.txt";
+        fileHandlerGUI.filePathField.setText(validInputFilePath);
+
+        // Set the output file path (directory)
+        String outputDirectoryPath = "E:/output.txt";
+        fileHandlerGUI.outputFilePathField.setText(outputDirectoryPath);
+
+        // Simulate button click to trigger file processing
+        fileHandlerGUI.new ProcessButtonListener()
+                .actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+
+        // Check if the output file is generated
+        File outputFile = new File(outputDirectoryPath);
+        assertFalse(outputFile.exists());
+
     }
 
 
