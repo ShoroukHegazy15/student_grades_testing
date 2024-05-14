@@ -3,16 +3,16 @@ package com.company;
 public class Student {
     private String name;
     private String code;
-    private Integer activitiesMark;
-    private Integer oralPractMark;
-    private Integer midtermMark;
-    private Integer finalExamMark;
+    private int activitiesMark;
+    private int oralPractMark;
+    private int midtermMark;
+    private int finalExamMark;
     private String grade;
     private double GPA;
-    private Integer totalMark;
+    private int totalMark;
     private boolean valid;
 
-    public Student(String name, String code, Integer activitiesMark,Integer oralPractMark, Integer midtermMark, Integer finalExamMark) {
+    public Student(String name, String code, int activitiesMark,int oralPractMark, int midtermMark, int finalExamMark) {
         this.name = name;
         this.code = code;
         this.activitiesMark = activitiesMark;
@@ -24,7 +24,7 @@ public class Student {
 
     public String printStudent(){
 
-        Integer totalMark = getTotalMark();
+        int totalMark = getTotalMark();
         String grade = getGrade();
         double GPA = getGPA();
 
@@ -49,19 +49,19 @@ public class Student {
         this.code = code;
     }
 
-    public void setActivitiesMark(Integer activitiesMark) {
+    public void setActivitiesMark(int activitiesMark) {
         this.activitiesMark = activitiesMark;
     }
 
-    public void setOralPractMark(Integer oralPractMark) {
+    public void setOralPractMark(int oralPractMark) {
         this.oralPractMark = oralPractMark;
     }
 
-    public void setMidtermMark(Integer midtermMark) {
+    public void setMidtermMark(int midtermMark) {
         this.midtermMark = midtermMark;
     }
 
-    public void setFinalExamMark(Integer finalExamMark) {
+    public void setFinalExamMark(int finalExamMark) {
         this.finalExamMark = finalExamMark;
     }
 
@@ -71,7 +71,7 @@ public class Student {
                 + finalExamMark + midtermMark;
     }
 
-    public void setTotalMark(Integer totalMark) {
+    public void setTotalMark(int totalMark) {
         this.totalMark = totalMark;
     }
     public String getName() {
@@ -82,15 +82,15 @@ public class Student {
         return code;
     }
 
-    public Integer getActivitiesMark() {
+    public int getActivitiesMark() {
         return activitiesMark;
     }
 
-    public Integer getOralPractMark() {
+    public int getOralPractMark() {
         return oralPractMark;
     }
 
-    public Integer getMidtermMark() {
+    public int getMidtermMark() {
         return midtermMark;
     }
 
@@ -98,7 +98,7 @@ public class Student {
         calculateGrade_GPA();
         return grade;
     }
-    public Integer getTotalMark() {
+    public int getTotalMark() {
 
         calculatetotalMark();
         return totalMark;
@@ -171,7 +171,7 @@ public class Student {
         }
     }
 
-    public Integer getFinalExamMark() { return finalExamMark; }
+    public int getFinalExamMark() { return finalExamMark; }
 
     public boolean isValid(){
         boolean isValid=isNameValid(this.name) && isCodeValid(this.code) && isMarkValid(this.activitiesMark) && isMarkValid(this.oralPractMark) && isMidMarkValid(this.midtermMark) && isFinalMarkValid(this.finalExamMark);
@@ -216,7 +216,7 @@ public class Student {
             return true;
         }
     }
-    public boolean isMarkValid(Integer mark){
+    public boolean isMarkValid(int mark){
 
         if (!(mark>=0 && mark<=10)) {
             System.err.println("Mark is outside the range: " + mark);
@@ -226,7 +226,7 @@ public class Student {
         }
     }
 
-    public boolean isMidMarkValid(Integer mark){
+    public boolean isMidMarkValid(int mark){
         if (!(mark>=0 && mark<=20)) {
             System.err.println("Mark is outside the range: " + mark);
             return false;
@@ -234,7 +234,7 @@ public class Student {
             return true;
         }
     }
-    public boolean isFinalMarkValid(Integer mark){
+    public boolean isFinalMarkValid(int mark){
         if (!(mark>=0 && mark<=60)) {
             System.err.println("Mark is outside the range: " + mark);
             return false;
@@ -242,7 +242,7 @@ public class Student {
             return true;
         }
     }
-    public boolean isTotalMarkValid(Integer mark){
+    public boolean isTotalMarkValid(int mark){
         if (!(mark>=0 && mark<=100)) {
             System.err.println("Total Mark is outside the range: " + mark);
             return false;
