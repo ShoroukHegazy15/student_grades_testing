@@ -136,8 +136,6 @@ public class SubjectTest {
     @Test
     public void testDefaultFullMark() { //bug found here
         Subject subject = new Subject();
-        assertEquals(Integer.valueOf(100), subject.getFullMark());
+        assertEquals(100, subject.getFullMark());
     }
-
-
 }
