@@ -12,8 +12,8 @@ import java.util.Vector;
 
 
 public class FileHandlerGUI extends JFrame{
-    private JTextField filePathField;
-    private JTextField outputFilePathField;
+    JTextField filePathField;
+    JTextField outputFilePathField;
     private JTextArea outputTextArea;
     private String filePath;
 
@@ -99,7 +99,7 @@ public class FileHandlerGUI extends JFrame{
         }
     }
 
-    private class ProcessButtonListener implements ActionListener {
+    class ProcessButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String filePath = filePathField.getText();
             FileHandler fileHandler = new FileHandler();

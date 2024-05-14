@@ -19,14 +19,14 @@ public class IntegrationTesting {
         // Validate student information
         assertEquals("Mustafa Osama", student.getName());
         assertEquals("9955661A", student.getCode());
-        assertEquals(Integer.valueOf(8), student.getActivitiesMark());
-        assertEquals(Integer.valueOf(7), student.getOralPractMark());
-        assertEquals(Integer.valueOf(18), student.getMidtermMark());
-        assertEquals(Integer.valueOf(60), student.getFinalExamMark());
+        assertEquals(8, student.getActivitiesMark());
+        assertEquals(7, student.getOralPractMark());
+        assertEquals(18, student.getMidtermMark());
+        assertEquals(60, student.getFinalExamMark());
 
         //Validate total mark
         student.calculatetotalMark();
-        assertEquals(Integer.valueOf(93), student.getTotalMark());
+        assertEquals(93, student.getTotalMark());
 
         //validate GPA and grade
         student.calculateGrade_GPA();
@@ -152,7 +152,7 @@ public class IntegrationTesting {
         }
     }
 
-    /*@Test
+    @Test
     public void testFileProcessingSuccess() {
         // Prepare GUI for testing
         FileHandlerGUI fileHandlerGUI = new FileHandlerGUI();
@@ -164,20 +164,23 @@ public class IntegrationTesting {
         fileHandlerGUI.filePathField.setText(validInputFilePath);
 
         // Set the output file path (directory)
-        String outputDirectoryPath = "F:\\DB";
+        String outputDirectoryPath = "E:/output.txt";
         fileHandlerGUI.outputFilePathField.setText(outputDirectoryPath);
 
         // Simulate button click to trigger file processing
         fileHandlerGUI.new ProcessButtonListener()
                 .actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 
-        // Check if the output file is generated
-        File outputFile = new File(STR."\{outputDirectoryPath}/output.txt");
+
+        File outputFile = new File(outputDirectoryPath);
         assertTrue(outputFile.exists());
+        // Check if the output file is generated
+//        File outputFile = new File(STR."\{outputDirectoryPath}/output.txt");
+//        assertTrue(outputFile.exists());
 
         // Clean up: delete the output file
         outputFile.delete();
-    }*/
+    }
 
 
 
