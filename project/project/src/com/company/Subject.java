@@ -27,7 +27,7 @@ public class Subject {
         return code;
     }
 
-    public Integer getFullMark() {
+    public int getFullMark() {
         return fullMark;
     }
 
@@ -66,7 +66,7 @@ public class Subject {
         }
         return true;
     }
-    public boolean isFullMarkValid(Integer mark){
+    public boolean isFullMarkValid(int mark){
         if (mark!=100) {
             System.err.println("FullMark isn't equal to 100: " + mark);
             return false;
