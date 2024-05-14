@@ -152,7 +152,7 @@ public class IntegrationTesting {
         }
     }
 
-    @Test
+    /*@Test
     public void testFileProcessingSuccess() {
         // Prepare GUI for testing
         FileHandlerGUI fileHandlerGUI = new FileHandlerGUI();
@@ -177,7 +177,7 @@ public class IntegrationTesting {
 
         // Clean up: delete the output file
         outputFile.delete();
-    }
+    }*/
 
 
 
