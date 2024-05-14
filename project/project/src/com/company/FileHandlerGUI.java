@@ -4,10 +4,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Vector;
 
 
@@ -104,10 +101,10 @@ public class FileHandlerGUI extends JFrame{
             String filePath = filePathField.getText();
             File file = new File(filePath);
 
-            // Check if the file is empty
-            if (file.length() == 0) {
+            // Check if the file is empty or does not exist
+            if (!file.exists() || file.length() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "The input file is empty. Please select a non-empty file.",
+                        "The input file is empty or does not exist. Please select a non-empty file.",
                         "Empty File",
                         JOptionPane.WARNING_MESSAGE);
                 return;
@@ -115,22 +112,56 @@ public class FileHandlerGUI extends JFrame{
 
             FileHandler fileHandler = new FileHandler();
             fileHandler.setFilePath(filePath);
-            DataBundle dataBundle = fileHandler.GetData();
 
-            Vector<Student> students = dataBundle.getStudents();
-            Subject subject = dataBundle.getSubject();
+            try {
+                DataBundle dataBundle = fileHandler.GetData();
+                if (dataBundle == null) {
+                    // Handling the case where GetData returns null due to an error.
+                    JOptionPane.showMessageDialog(null,
+                            "Error processing the file. Please check the file format and contents.",
+                            "Processing Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-            // Print students info from file
-            System.out.println("Students info from file:");
-            for (Student st : students) {
-                System.out.println(st.printStudent());
+                Vector<Student> students = dataBundle.getStudents();
+                Subject subject = dataBundle.getSubject();
+
+                // Build the content string to be written and displayed
+                StringBuilder content = new StringBuilder();
+                content.append("Subject Name: ").append(subject.getName()).append("            Max Mark: ").append(subject.getFullMark()).append("\n");
+                content.append(String.format("%-40s%-20s%-10s%-10s\n", "Student name", "Student number", "GPA", "Grade"));
+
+                for (Student student : students) {
+                    content.append(String.format("%-40s%-20s%-10s%-10s\n", student.getName(), student.getCode(), student.getGPA(), student.getGrade()));
+                }
+
+                // Update the JTextArea with the content
+                outputTextArea.setText(content.toString());
+
+                // Write the content to the file
+                String outputFilePath = outputFilePathField.getText();
+                try (PrintWriter writer = new PrintWriter(new FileWriter(outputFilePath))) {
+                    writer.print(content.toString());
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null,
+                            "Error writing to file: " + ex.getMessage(),
+                            "File Writing Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (IllegalArgumentException ex) {
+                // Catch parsing errors from FileHandler
+                JOptionPane.showMessageDialog(null,
+                        "Data format error: " + ex.getMessage(),
+                        "Data Format Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
-
-            String outputFilePath = outputFilePathField.getText();
-            OutputFileHandler output = new OutputFileHandler();
-            output.printFile(students, subject, outputFilePath);
         }
     }
+
+
+
+
 
 
     public static void main(String[] args) {
