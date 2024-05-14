@@ -9,7 +9,7 @@ import java.util.Vector;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
-public class IntegrationTesting {
+public class integrationTesting {
 
     @Test
     public void testStudentModule() {
@@ -171,12 +171,11 @@ public class IntegrationTesting {
         fileHandlerGUI.new ProcessButtonListener()
                 .actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 
-
+        // Check if the output file is generated
         File outputFile = new File(outputDirectoryPath);
         assertTrue(outputFile.exists());
-        // Check if the output file is generated
-//        File outputFile = new File(STR."\{outputDirectoryPath}/output.txt");
-//        assertTrue(outputFile.exists());
+
+
 
         // Clean up: delete the output file
         outputFile.delete();

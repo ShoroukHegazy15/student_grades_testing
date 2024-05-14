@@ -9,7 +9,7 @@ import java.util.Vector;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
-public class IntegrationTesting {
+public class integrationTesting {
 
     @Test
     public void testStudentModule() {
@@ -152,7 +152,7 @@ public class IntegrationTesting {
         }
     }
 
-    /*@Test
+    @Test
     public void testFileProcessingSuccess() {
         // Prepare GUI for testing
         FileHandlerGUI fileHandlerGUI = new FileHandlerGUI();
@@ -164,7 +164,7 @@ public class IntegrationTesting {
         fileHandlerGUI.filePathField.setText(validInputFilePath);
 
         // Set the output file path (directory)
-        String outputDirectoryPath = "F:\\DB";
+        String outputDirectoryPath = "E:/output.txt";
         fileHandlerGUI.outputFilePathField.setText(outputDirectoryPath);
 
         // Simulate button click to trigger file processing
@@ -172,12 +172,14 @@ public class IntegrationTesting {
                 .actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 
         // Check if the output file is generated
-        File outputFile = new File(STR."\{outputDirectoryPath}/output.txt");
+        File outputFile = new File(outputDirectoryPath);
         assertTrue(outputFile.exists());
+
+
 
         // Clean up: delete the output file
         outputFile.delete();
-    }*/
+    }
 
 
 
