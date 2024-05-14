@@ -102,23 +102,36 @@ public class FileHandlerGUI extends JFrame{
     class ProcessButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String filePath = filePathField.getText();
+            File file = new File(filePath);
+
+            // Check if the file is empty
+            if (file.length() == 0) {
+                JOptionPane.showMessageDialog(null,
+                        "The input file is empty. Please select a non-empty file.",
+                        "Empty File",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             FileHandler fileHandler = new FileHandler();
             fileHandler.setFilePath(filePath);
+            DataBundle dataBundle = fileHandler.GetData();
 
-            Vector<Student> lines = fileHandler.GetData().getStudents();
-            Subject subj = fileHandler.GetData().getSubject();
+            Vector<Student> students = dataBundle.getStudents();
+            Subject subject = dataBundle.getSubject();
 
-            // Print the integers read from the file
+            // Print students info from file
             System.out.println("Students info from file:");
-            for (Student st : lines) {
-                //outputTextArea.append(st.printStudent() + "\n");
-                st.printStudent();
+            for (Student st : students) {
+                System.out.println(st.printStudent());
             }
+
             String outputFilePath = outputFilePathField.getText();
-            OutputFileHandler output= new OutputFileHandler();
-            output.printFile(lines,subj,outputFilePath);
+            OutputFileHandler output = new OutputFileHandler();
+            output.printFile(students, subject, outputFilePath);
         }
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
