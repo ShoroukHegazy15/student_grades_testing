@@ -1,3 +1,11 @@
+package com.company;
+
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class whiteBoxTesting {
+
 @Test
     public void testIsValid1(){
         Student student = new Student("Mustafa Osama", "1234567A", 8, 7, 18, 55);
@@ -73,3 +81,4 @@
         Exception exception = assertThrows(IllegalArgumentException.class, fileHandler::GetData);
         assertTrue(exception.getMessage().contains("Invalid student data format"));
     }
+}
