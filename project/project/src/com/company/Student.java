@@ -22,24 +22,24 @@ public class Student {
 
     }
 
-    public String printStudent(){
-
-        int totalMark = getTotalMark();
-        String grade = getGrade();
-        double GPA = getGPA();
-
-        StringBuilder stringBuilder = new StringBuilder();
-        System.out.println("name and code : " + this.name+" , "+code);
-        System.out.println("\t Activities Mark: " + this.activitiesMark);
-        System.out.println("\t Oral/practical Mark: "+this.oralPractMark);
-        System.out.println("\t Midterm Mark: "+this.midtermMark);
-        System.out.println("\t Final exam Mark: "+this.finalExamMark);
-        System.out.println("\t Total Mark: "+totalMark);
-        System.out.println("\t Grade: "+grade);
-        System.out.println("\t GPA: "+GPA);
-
-        return stringBuilder.toString();
-    }
+//    public String printStudent(){
+//
+//        int totalMark = getTotalMark();
+//        String grade = getGrade();
+//        double GPA = getGPA();
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        System.out.println("name and code : " + this.name+" , "+code);
+//        System.out.println("\t Activities Mark: " + this.activitiesMark);
+//        System.out.println("\t Oral/practical Mark: "+this.oralPractMark);
+//        System.out.println("\t Midterm Mark: "+this.midtermMark);
+//        System.out.println("\t Final exam Mark: "+this.finalExamMark);
+//        System.out.println("\t Total Mark: "+totalMark);
+//        System.out.println("\t Grade: "+grade);
+//        System.out.println("\t GPA: "+GPA);
+//
+//        return stringBuilder.toString();
+//    }
 
     public void setName(String name) {
         this.name = name;
@@ -67,8 +67,8 @@ public class Student {
 
     public void calculatetotalMark()
     {
-        totalMark = activitiesMark + oralPractMark
-                + finalExamMark + midtermMark;
+        totalMark = getActivitiesMark() + getOralPractMark()
+                + getFinalExamMark() + getMidtermMark();
     }
 
     public void setTotalMark(int totalMark) {
@@ -117,6 +117,7 @@ public class Student {
 
     public void calculateGrade_GPA()
     {
+        calculatetotalMark();
 
         if ((totalMark >= 97) && (totalMark <= 100)) {
             grade = "A+";

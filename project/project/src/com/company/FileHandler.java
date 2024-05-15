@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+import static java.lang.Integer.parseInt;
+
 public class FileHandler {
     private String filePath;
 
@@ -50,7 +52,7 @@ public class FileHandler {
     private Student parseStudent(String line) {
         try {
             String[] info = line.split(",");
-            return new Student(info[0], info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]), Integer.parseInt(info[4]), Integer.parseInt(info[5]));
+            return new Student(info[0], info[1], parseInt(info[2]), parseInt(info[3]), parseInt(info[4]), parseInt(info[5]));
         } catch (Exception e) {
             System.err.println("Failed to parse student: " + e.getMessage());
             return null;
@@ -60,7 +62,7 @@ public class FileHandler {
     private Subject parseSubject(String line) {
         try {
             String[] info = line.split(",");
-            return new Subject(info[0], info[1], Integer.parseInt(info[2]));
+            return new Subject(info[0], info[1], parseInt(info[2]));
         } catch (Exception e) {
             System.err.println("Failed to parse subject: " + e.getMessage());
             return null;
