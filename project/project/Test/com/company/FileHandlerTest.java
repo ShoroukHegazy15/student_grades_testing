@@ -1,124 +1,169 @@
 package com.company;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Vector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 public class FileHandlerTest {
-    private FileHandler fileHandler;
-    private File tempFile;
 
-    @Before
-    public void setUp() throws IOException {
-        fileHandler = new FileHandler();
-        tempFile = File.createTempFile("tempfile", ".txt");
-        FileWriter writer = new FileWriter(tempFile);
-        writer.write("Mathematics,CSE123s,10\n");
-        writer.write("Mennatullah Yasser Mohamed,19000581,8,8,16,50\n");
-        writer.write("Shorouk Hegazy,1900058s,9,7,15,55\n");
-        writer.write("Mohamed Khaled,19000532,9,9,16,40\n");
-        writer.close();
-    }
-
-    @After
-    public void tearDown() {
-        if (tempFile.exists()) {
-            tempFile.delete();
-        }
+    @Test
+    public void testSetFilePath() {
+        FileHandler fileHandler = new FileHandler();
+        String filePath = "sample.txt";
+        fileHandler.setFilePath(filePath);
+        assertEquals(filePath, fileHandler.filePath);
     }
 
     @Test
-    public void testGetData() {
+    public void testGetDataValidFile() throws IOException {
+        // Create a temporary valid input file
+        File tempFile = File.createTempFile("valid_input", ".txt");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
+            writer.println("Mathematics,CSE123s,100");
+            writer.println("Mohamed Khaled,1234567S,8,9,15,55");
+            writer.println("Shorouk Hegazy,7654321S,7,8,16,50");
+            writer.println("Renal Tarek,9876543S,9,7,14,60");
+        }
+
+        FileHandler fileHandler = new FileHandler();
         fileHandler.setFilePath(tempFile.getAbsolutePath());
         DataBundle dataBundle = fileHandler.GetData();
 
-        Vector<Student> students = dataBundle.getStudents();
-        assertEquals(3, students.size());
+        assertNotNull(dataBundle);
+        assertNotNull(dataBundle.getSubject());
+        assertTrue(dataBundle.getSubject().isValid());
+        assertEquals(3, dataBundle.getStudents().size());
 
-        Student student1 = students.get(0);
-        assertEquals("Mennatullah Yasser Mohamed", student1.getName());
-        assertEquals("19000581", student1.getCode());
-        assertEquals(8, (int) student1.getActivitiesMark());
-        assertEquals(8, (int) student1.getOralPractMark());
-        assertEquals(16, (int) student1.getMidtermMark());
-        assertEquals(50, (int) student1.getFinalExamMark());
+        for (Student student : dataBundle.getStudents()) {
+            assertTrue(student.isValid());
+        }
 
-        Student student2 = students.get(1);
-        assertEquals("Shorouk Hegazy", student2.getName());
-        assertEquals("1900058s", student2.getCode());
-        assertEquals(9, (int) student2.getActivitiesMark());
-        assertEquals(7, (int) student2.getOralPractMark());
-        assertEquals(15, (int) student2.getMidtermMark());
-        assertEquals(55, (int) student2.getFinalExamMark());
+        // Delete the temporary file
+        assertTrue(tempFile.delete());
+    }
 
-        Student student3 = students.get(2);
-        assertEquals("Mohamed Khaled", student3.getName());
-        assertEquals("19000532", student3.getCode());
-        assertEquals(9, (int) student3.getActivitiesMark());
-        assertEquals(9, (int) student3.getOralPractMark());
-        assertEquals(16, (int) student3.getMidtermMark());
-        assertEquals(40, (int) student3.getFinalExamMark());
+    @Test
+    public void testGetDataEmptyFile() throws IOException {
+        // Create a temporary empty input file
+        File tempFile = File.createTempFile("empty_file", ".txt");
 
-        Subject subject = dataBundle.getSubject();
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.setFilePath(tempFile.getAbsolutePath());
+        DataBundle dataBundle = fileHandler.GetData();
+
+        assertNotNull(dataBundle);
+        assertNotNull(dataBundle.getSubject());
+        assertTrue(dataBundle.getStudents().isEmpty());
+
+        // Delete the temporary file
+        assertTrue(tempFile.delete());
+    }
+
+    @Test
+    public void testGetDataInvalidSubject() throws IOException {
+        // Create a temporary file with an invalid subject header
+        File tempFile = File.createTempFile("invalid_subject", ".txt");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
+            writer.println("Mathematics,CSE123SSs,110");
+            writer.println("Mohamed Khaled,1234567S,8,9,15,55");
+        }
+
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.setFilePath(tempFile.getAbsolutePath());
+
+        Exception exception = assertThrows(IllegalArgumentException.class, fileHandler::GetData);
+
+        String expectedMessagePart = "Invalid subject header format:";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessagePart));
+
+        // Delete the temporary file
+        assertTrue(tempFile.delete());
+    }
+
+    @Test
+    public void testGetDataInvalidStudent() throws IOException {
+        // Create a temporary file with an invalid student line
+        File tempFile = File.createTempFile("invalid_student", ".txt");
+        try (PrintWriter writer = new PrintWriter(new FileWriter(tempFile))) {
+            writer.println("Mathematics,CSE123s,100");
+            writer.println("Mohamed Khaled,1234567S,8,9,15,55");
+            writer.println("Shorouk Hegazy,7654321S,7,8,16,invalid_score");
+        }
+
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.setFilePath(tempFile.getAbsolutePath());
+
+        Exception exception = assertThrows(IllegalArgumentException.class, fileHandler::GetData);
+
+        String expectedMessagePart = "Invalid student data format:";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessagePart));
+
+        // Delete the temporary file
+        assertTrue(tempFile.delete());
+    }
+
+    @Test
+    public void testGetDataFileNotFound() {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.setFilePath("non_existent_file.txt");
+
+        DataBundle dataBundle = fileHandler.GetData();
+
+        assertNull(dataBundle);
+    }
+
+    @Test
+    public void testParseStudent() {
+        FileHandler fileHandler = new FileHandler();
+        String studentLine = "Mohamed Khaled,1234567S,8,9,15,55";
+
+        Student student = fileHandler.parseStudent(studentLine);
+
+        assertNotNull(student);
+        assertEquals("Mohamed Khaled", student.getName());
+        assertEquals("1234567S", student.getCode());
+        assertEquals(8, student.getActivitiesMark());
+        assertEquals(9, student.getOralPractMark());
+        assertEquals(15, student.getMidtermMark());
+        assertEquals(55, student.getFinalExamMark());
+    }
+
+    @Test
+    public void testParseStudentInvalid() {
+        FileHandler fileHandler = new FileHandler();
+        String studentLine = "Invalid,Student,Data";
+
+        Student student = fileHandler.parseStudent(studentLine);
+
+        assertNull(student);
+    }
+
+    @Test
+    public void testParseSubject() {
+        FileHandler fileHandler = new FileHandler();
+        String subjectLine = "Mathematics,CSE123s,100";
+
+        Subject subject = fileHandler.parseSubject(subjectLine);
+
+        assertNotNull(subject);
         assertEquals("Mathematics", subject.getName());
         assertEquals("CSE123s", subject.getCode());
-        assertEquals(10, (int) subject.getFullMark());
+        assertEquals(100, subject.getFullMark());
     }
 
     @Test
-    public void testGetDataWithInvalidFilePath() {
-        fileHandler.setFilePath("invalid/path/to/file.txt");
-        DataBundle dataBundle = fileHandler.GetData();
+    public void testParseSubjectInvalid() {
+        FileHandler fileHandler = new FileHandler();
+        String subjectLine = "Invalid,Subject,Data";
 
-        Vector<Student> students = dataBundle.getStudents();
-        assertTrue(students.isEmpty());
+        Subject subject = fileHandler.parseSubject(subjectLine);
 
-        Subject subject = dataBundle.getSubject();
-        assertEquals("", subject.getName());
-        assertEquals("", subject.getCode());
-        assertEquals(100, (int) subject.getFullMark());
+        assertNull(subject);
     }
-
-    @Test
-    public void testGetDataWithEmptyFile() throws IOException {
-        File emptyFile = File.createTempFile("emptyfile", ".txt");
-        fileHandler.setFilePath(emptyFile.getAbsolutePath());
-        DataBundle dataBundle = fileHandler.GetData();
-
-        Vector<Student> students = dataBundle.getStudents();
-        assertTrue(students.isEmpty());
-
-        Subject subject = dataBundle.getSubject();
-        assertEquals("", subject.getName());
-        assertEquals("", subject.getCode());
-        assertEquals(100, (int) subject.getFullMark());
-
-        emptyFile.delete();
-    }
-
-    @Test
-    public void testGetDataWithInvalidStudentData() throws IOException {
-        File invalidDataFile = File.createTempFile("invalidfile", ".txt");
-        FileWriter writer = new FileWriter(invalidDataFile);
-        writer.write("Mathematics,CSE123s,100\n");
-        writer.write("mohamed@@##khaled,19000581SSEE,88,88,88,88\n"); //Invalid Student Data
-        writer.close();
-
-        fileHandler.setFilePath(invalidDataFile.getAbsolutePath());
-        DataBundle dataBundle = fileHandler.GetData();
-
-        Vector<Student> students = dataBundle.getStudents();
-        assertTrue(students.isEmpty());
-
-        invalidDataFile.delete();
-    }
-
 }
