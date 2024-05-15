@@ -1,0 +1,4 @@
+Math##$$ematics,CSE123sSSS,200
+Mohamed Khaled,1234567S,8,9,15,55
+Shorouk Hegazy,7654321S,7,8,16,50
+Renal Tarek,9876543S,9,7,14,60

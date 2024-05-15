@@ -1,0 +1,4 @@
+Mathematics,CSE123s,100
+Mohamed_Khaled,1234567S,8,9,15,55
+Shorouk_Hegazy,7654321S,7,8,16,50
+Renal_Tarek,9876543S,9,7,14,invalid_score
