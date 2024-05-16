@@ -8,7 +8,7 @@ import java.util.Vector;
 import static java.lang.Integer.parseInt;
 
 public class FileHandler {
-    private String filePath;
+    String filePath;
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
@@ -49,7 +49,7 @@ public class FileHandler {
         return new DataBundle(list, subj);
     }
 
-    private Student parseStudent(String line) {
+    Student parseStudent(String line) {
         try {
             String[] info = line.split(",");
             return new Student(info[0], info[1], parseInt(info[2]), parseInt(info[3]), parseInt(info[4]), parseInt(info[5]));
@@ -59,7 +59,7 @@ public class FileHandler {
         }
     }
 
-    private Subject parseSubject(String line) {
+    Subject parseSubject(String line) {
         try {
             String[] info = line.split(",");
             return new Subject(info[0], info[1], parseInt(info[2]));

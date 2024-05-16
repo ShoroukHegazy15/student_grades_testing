@@ -68,8 +68,8 @@ public class whiteBoxTesting {
     public void testInvalidSubjectHeaderFormat() {
         FileHandler fileHandler = new FileHandler();
         String currentDirectory = System.getProperty("user.dir");
-        String validInputFilePath = String.format("%s/project/invalidSubjectHeaderSample.txt", currentDirectory);
-        fileHandler.setFilePath(validInputFilePath); // Assume this file has an invalid subject header
+        String validInputFilePath = String.format("%s/project/invalid_subject_header_input.txt", currentDirectory);
+        fileHandler.setFilePath(validInputFilePath);
         Exception exception = assertThrows(IllegalArgumentException.class, fileHandler::GetData);
         assertTrue(exception.getMessage().contains("Invalid subject header format"));
     }
@@ -77,7 +77,9 @@ public class whiteBoxTesting {
     @Test
     public void testInvalidStudentDataFormat() {
         FileHandler fileHandler = new FileHandler();
-        fileHandler.setFilePath("invalidStudentData.txt"); // Assume this file has invalid student data
+        String currentDirectory = System.getProperty("user.dir");
+        String validInputFilePath = String.format("%s/project/invalid_student_header_input.txt", currentDirectory);
+        fileHandler.setFilePath(validInputFilePath);
         Exception exception = assertThrows(IllegalArgumentException.class, fileHandler::GetData);
         assertTrue(exception.getMessage().contains("Invalid student data format"));
     }
